@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Recommended Products</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="result-container">
+
+    <h1 class="result-title">Recommended Products</h1>
+
+    {% if products|length == 0 %}
+
+    <div class="no-product">
+        ❌ Product Not Available
+    </div>
+
+    {% else %}
+
+    <div class="result-cards">
+
+        {% for product in products %}
+
+        <div class="result-card">
+
+            {% if 'watch' in product['category'] %}
+            <div class="product-photo">⌚</div>
+
+            {% elif 'shoe' in product['category'] or 'sneaker' in product['category'] %}
+            <div class="product-photo">👟</div>
+
+            {% elif 'laptop' in product['category'] %}
+            <div class="product-photo">💻</div>
+
+            {% elif 'smartphone' in product['category'] or 'mobile' in product['category'] %}
+            <div class="product-photo">📱</div>
+
+            {% elif 'headphone' in product['category'] %}
+            <div class="product-photo">🎧</div>
+
+            {% elif 'speaker' in product['category'] %}
+            <div class="product-photo">🔊</div>
+
+            {% elif 'tv' in product['category'] %}
+            <div class="product-photo">📺</div>
+
+            {% else %}
+            <div class="product-photo">🛍️</div>
+            {% endif %}
+
+            <h2>{{ product['product_name'].title() }}</h2>
+
+            <p><b>Platform:</b> {{ product['platform'].title() }}</p>
+
+            <p><b>Price:</b> ₹{{ product['price'] }}</p>
+
+            <a href="{{ product['product_link'] }}" target="_blank">
+                <button class="link-btn">Link</button>
+            </a>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+    <div class="pagination">
+
+        {% if page > 1 %}
+        <a href="/recommend?search_text={{ search_text }}&page={{ page-1 }}">
+            <button>Previous</button>
+        </a>
+        {% endif %}
+
+        {% for p in range(1, total_pages + 1) %}
+        <a href="/recommend?search_text={{ search_text }}&page={{ p }}">
+            <button>{{ p }}</button>
+        </a>
+        {% endfor %}
+
+        {% if page < total_pages %}
+        <a href="/recommend?search_text={{ search_text }}&page={{ page+1 }}">
+            <button>Next</button>
+        </a>
+        {% endif %}
+
+    </div>
+
+    {% endif %}
+
+</div>
+
+</body>
+</html>

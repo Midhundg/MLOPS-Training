@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SmartPick AI</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="main-box">
+    <h1>SmartPick AI</h1>
+    <p>Search products using Text, Image, Audio or Video</p>
+
+    <form action="/recommend" method="POST" enctype="multipart/form-data">
+
+        <input type="text" name="search_text" placeholder="Enter product name...">
+
+        <div class="input-grid">
+
+            <div class="upload-card">
+                <div class="icon">🖼️</div>
+                <label>Upload Image</label>
+                <input type="file" name="image" accept="image/*">
+            </div>
+
+            <div class="upload-card">
+                <div class="icon">🎧</div>
+                <label>Upload Audio</label>
+                <input type="file" name="audio" accept="audio/*">
+            </div>
+
+            <div class="upload-card">
+                <div class="icon">🎥</div>
+                <label>Upload Video</label>
+                <input type="file" name="video" accept="video/*">
+            </div>
+
+        </div>
+
+        <button type="submit">Check</button>
+
+    </form>
+</div>
+
+</body>
+</html>
